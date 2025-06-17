@@ -41,7 +41,7 @@ cp .env.example .env
 Atualize no .env:
 
 ```
-DB_HOST=db
+DB_HOST=127.0.0.1
 DB_DATABASE=testamar
 DB_USERNAME=root
 DB_PASSWORD=root
