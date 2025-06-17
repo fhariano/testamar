@@ -8,7 +8,7 @@ Sistema de gestão de produtos com usuários `admin` e `user` desenvolvido em **
 - ✅ Upload de múltiplas imagens com redimensionamento automático.
 - ✅ Validação de preços (preço de venda ≥ custo + 10%).
 - ✅ Permissões: 
-  - Admin: Acesso total (usuários e produtos).
+  - Admin: Acesso total (adicionar novos usuários e gerenciar produtos).
   - User: Acesso somente ao gerenciamento de produtos.
 - ✅ Interface SPA com Inertia + Vue.
 
@@ -49,6 +49,7 @@ DB_PASSWORD=root
 docker exec -it testamar-app bash
 php artisan key:generate
 php artisan migrate --seed
+php artisan storage:link
 
 🎨 Build Frontend
 
@@ -61,3 +62,12 @@ exit
 App: http://localhost:8000
 PhpMyAdmin: http://localhost:8080
 
+### Login para usuários de testes
+user: admin@example.com
+pwd: password
+
+user: user@example.com
+pwd: password
+
+### Observação:
+Novos usuários faz-se necessário uma conta de email real para ativação da conta e acesso!
