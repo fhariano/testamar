@@ -65,18 +65,25 @@ exit
 ```
 
 ### Acesso local
+```
 App: http://localhost:8000
 PhpMyAdmin: http://localhost:8080
+```
 
 ### Acesso produção (válido até 20/06/2025 às 20h)
-http://testamar.arianoti.com.br/
+```
+App: http://testamar.arianoti.com.br
+PhpMyAdmin: http://testamar.arianoti.com.br:8080
+```
 
 ### Login para testes de acesso
+```
 user: admin@example.com
 pwd: password
 
 user: user@example.com
 pwd: password
+```
 
 ### Observação:
 Novos usuários faz-se necessário uma conta de email real para ativação do cadastro!
