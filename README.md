@@ -22,7 +22,7 @@ Sistema de gestão de produtos com usuários `admin` e `user` desenvolvido em **
 ### 2️⃣ Clone o projeto
 
 ```bash
-git clone https://github.com/seuusuario/testamar.git
+git clone https://github.com/fhariano/testamar.git
 cd testamar
 
 3️⃣ Suba os containers
