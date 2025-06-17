@@ -26,13 +26,13 @@ git clone https://github.com/fhariano/testamar.git
 cd testamar
 ```
 
-3️⃣ Suba os containers
+### 3️⃣ Suba os containers
 
 ```
 docker-compose up --build -d
 ```
 
-4️⃣ Configure o ambiente
+### 4️⃣ Configure o ambiente
 
 ```
 cp .env.example .env
@@ -47,7 +47,7 @@ DB_USERNAME=root
 DB_PASSWORD=root
 ```
 
-5️⃣ Execute as migrations e seeders
+### 5️⃣ Execute as migrations e seeders
 
 ```
 docker exec -it testamar-app bash
@@ -56,7 +56,7 @@ php artisan migrate --seed
 php artisan storage:link
 ```
 
-🎨 Build Frontend
+### 🎨 Build Frontend
 
 ```
 docker exec -it testamar-app bash
