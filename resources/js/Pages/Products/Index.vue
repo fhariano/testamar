@@ -53,23 +53,6 @@
             >
               R$ {{ product.sale_price }}
             </td>
-            <!-- <td
-              class="border border-gray-300 dark:border-gray-600 p-2 text-center"
-            >
-              <span
-                :class="{
-                  'text-green-600 dark:text-green-400':
-                    product.status === 'ativo',
-                  'text-yellow-600 dark:text-yellow-400':
-                    product.status === 'fora',
-                  'text-gray-600 dark:text-gray-400':
-                    product.status === 'inativo',
-                }"
-                class="font-semibold"
-              >
-                {{ statusLabel(product.status) }}
-              </span>
-            </td> -->
             <td
               class="border border-gray-300 dark:border-gray-600 p-2 text-center"
             >
@@ -98,22 +81,8 @@
 import { Link, router, usePage } from "@inertiajs/vue3";
 import Pagination from "../../Components/Pagination.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { onMounted } from "vue";
 const { props } = usePage();
 const products = props.products.data;
-
-const statusLabel = (status) => {
-  switch (status) {
-    case "ativo":
-      return "Ativo";
-    case "inativo":
-      return "Inativo";
-    case "fora":
-      return "Fora de Estoque";
-    default:
-      return "Desconhecido";
-  }
-};
 
 function destroy(id, key) {
   if (confirm("Tem certeza que deseja excluir?")) {
@@ -122,9 +91,9 @@ function destroy(id, key) {
       preserveScroll: true,
       onError: (errors) => console.error(errors),
       onSuccess: () => {
-        const index = this.products.findIndex((item) => item.id === id);
+        const index = products.findIndex((item) => item.id === id);
         if (index !== -1) {
-          this.products.splice(index, 1);
+          products.splice(index, 1);
         }
       },
     });

@@ -7,11 +7,15 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ProductController extends Controller
 {
+    private $username;
+
     /**
      * Display a listing of the resource.
      *
@@ -45,6 +49,8 @@ class ProductController extends Controller
                 $product->images()->create(['image_path' => $path]);
             }
         }
+
+        Log::channel('myLog')->info('PRODUCT Store', ["Username" => $request->user()->email, "Product Info" => ["id" => $product->id, "name" => $product->name], "ORIGIN" => $_SERVER['REMOTE_ADDR']]);
 
         return redirect()->route('products.index')->with('success', 'Produto inserido com sucesso!');
     }
@@ -87,6 +93,8 @@ class ProductController extends Controller
             }
         }
 
+        Log::channel('myLog')->info('PRODUCT Update', ["Username" => $request->user()->email, "Product Info" => ["id" => $product->id, "name" => $product->name], "ORIGIN" => $_SERVER['REMOTE_ADDR']]);
+
         return redirect()->route('products.index')->with('success', 'Produto atualizado com sucesso!');
     }
 
@@ -96,12 +104,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Request $request, Product $product)
     {
         foreach ($product->images as $image) {
             Storage::disk('public')->delete($image->image_path);
             $image->delete();
         }
+
+        Log::channel('myLog')->info('PRODUCT Delete', ["Username" => $request->user()->email, "Product Info" => ["id" => $product->id, "name" => $product->name], "ORIGIN" => $_SERVER['REMOTE_ADDR']]);
 
         $product->delete();
 

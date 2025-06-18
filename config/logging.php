@@ -4,6 +4,9 @@ use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
+$dateFormat = "Y-m-d H:i:s";
+$output     = "[%datetime%] %level_name%\t: %message% - %context% - %extra.ip%\n";
+
 return [
 
     /*
@@ -85,7 +88,7 @@ return [
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
             ],
         ],
 
@@ -116,6 +119,18 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+        'myLog' => [
+            'driver'         => 'daily',
+            'formatter'      => \Monolog\Formatter\LineFormatter::class,
+            'tap'            => [App\Logging\CustomizeFormatter::class],
+            'formatter_with' => [
+                'format'                => $output,
+                'dateFormat'            => $dateFormat,
+                'allowInlineLineBreaks' => true,
+            ],
+            'path'           => storage_path('logs/testamar.log'),
+            'level'          => 'debug',
         ],
     ],
 

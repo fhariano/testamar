@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -45,6 +46,8 @@ class RegisteredUserController extends Controller
         ]);
 
         $user->assignRole(RolesEnum::User);
+
+        Log::channel('myLog')->info('User Register', ["Username" => $request->user()->email, "New User Registered" => ["name" => $user->name, "email" => $user->email], "ORIGIN" => $_SERVER['REMOTE_ADDR']]);
 
         event(new Registered($user));
 
